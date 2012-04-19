@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="stylesheetl; charset=utf-8" />
+        <title>ThouhgtWorks Studio Forum Migration</title>
+        <script type="application/javascript" src="static/js/html5uploader.js"></script>
+        <script type="application/javascript" src="static/js/jquery-1.7.1.js"></script>
+        <script type="application/javascript" src="static/js/bootstrap.js"></script>
+        <link rel="stylesheet" href="static/css/bootstrap.css" type="stylesheet" />
+        <link rel="stylesheet" href="static/css/bootstrap-responsive.css" type="stylesheet" />
+        <link rel="stylesheet" href="static/css/styles.css" type="stylesheet" />
+
+    </head>
+    <body onload="new uploader('drop', 'status', 'uploader.php', 'list');">
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+         <div class="container">
+          <span class="brand">ThouhgtWorks Studio Forum Migration (RightNow to ZenDesk)</span>
+          </div>
+        </div>
+      </div>
+      <div class="container" style="margin-top: 50px">
+        <div class="row">
+           <div class="span9">
+            <div class="hero-unit">
+              <h1>Let's get started</h1>
+              <p>Choose a .csv file to upload and specify the url to post forum contents to:</p>
+              <div id="box" class="well">
+                <span class="badge badge-info">  1</span><span>  must be a .csv file</span><br/>
+                <div  id="status">
+                   
+                </div> 
+
+                <div id="drop"><h2> Drag and Drop file to upload in here! Yup in here </h2></div>
+
+                <div id="list"></div>
+
+            </div>
+              <form class="well form-vertical" action ="main.php" method="POST">
+                <span class="badge badge-info"> 2</span><span>  put in your ZenDesk login credentials</span><br/><br/> 
+
+                <input type=hidden name=file value="" id="filename">
+                <input type="text" class="input-small" placeholder="User Name" id="username">
+                <input type="password" class="input-small" placeholder="Password" id ="password"> <br>
+                <input type="text" class="input-xlarge" placeholder="ZenDesk URL https://support.zendesk.com" id ="url">
+                <input type="text" class="input-small" placeholder="Forum ID" id="forumId"><br>
+                <button type="submit" class="btn btn-inverse btn-large"> <i class="icon-fire icon-white"></i>  Now post!</button>
+
+              </form>
+            </div>
+          </div>
+        </div>
+        <div>© 2012 ThoughtWorks, Inc.</div>
+      </div> <!-- end container-->
+    </body>
+</html>
+
