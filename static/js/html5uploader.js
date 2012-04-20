@@ -155,9 +155,9 @@ function uploader(place, status, targetPHP, show) {
 	// The inclusion of the event listeners (DragOver and drop)
 
 	this.uploadPlace =  document.getElementById(place);
-	this.uploadPlace.addEventListener("dragover", this.filedraghover, false);
-	this.uploadPlace.addEventListener("dragleave", this.filedraghover, false);
-	this.uploadPlace.addEventListener("drop", this.drop, false); 
+	this.uploadPlace.addEventListener("dragover", this.filedraghover, true);
+	this.uploadPlace.addEventListener("dragleave", this.filedraghover, true);
+	this.uploadPlace.addEventListener("drop", this.drop, true); 
 	this.uploadPlace.style.display = "block";
 
 }
