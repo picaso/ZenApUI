@@ -4,11 +4,12 @@
     <head>
         <meta http-equiv="Content-Type" content="stylesheetl; charset=utf-8" />
         <title>ThouhgtWorks Studio Forum Migration</title>
-        <script type="application/javascript" src="static/js/html5uploader.js"></script>
         <script type="application/javascript" src="static/js/jquery-1.7.1.js"></script>
         <script type="application/javascript" src="static/js/bootstrap.js"></script>
         <script type="application/javascript" src="static/js/validator.js"></script>
+        <script type="application/javascript" src="static/js/html5uploader.js"></script>
         <link rel="stylesheet" href="static/css/bootstrap.css" type="stylesheet" />
+        <link rel="stylesheet" href="static/js/google-code-prettify/prettify.css" type="stylesheet" />
         <link rel="stylesheet" href="static/css/bootstrap-responsive.css" type="stylesheet" />
         <link rel="stylesheet" href="static/css/styles.css" type="stylesheet" />
 
@@ -18,41 +19,72 @@
         <div class="navbar-inner">
          <div class="container">
           <span class="brand">ThouhgtWorks Studio Forum Migration (RightNow to ZenDesk)</span>
+      
           </div>
+      
         </div>
+      
       </div>
       <div class="container" style="margin-top: 50px ">
+         <div class="row">
+            <div class="span9">
+            <div class="tabbable">
+              <ul class="nav nav-tabs">
+                <li class=""><a href="#A" data-toggle="tab">Readme</a></li>
+                <li class="active"><a href="#B" data-toggle="tab">Get Started</a></li>
+              </ul>
+           
+          </div>  </div>
+        </div>
         <div class="row">
            <div class="span9">
-            <div class="hero-unit">
-              <h1>Let's get started</h1>
-              <p>Choose a .csv file to upload and specify the url to post forum contents to:</p>
-              <div id="box" class="well">
-                <a href="#" class="badge badge-info" rel="popover" data-content="Please upload just one csv file. We might be able to support multiple csv files in the near future." data-original-title="must be a .csv file"><i class =" icon-info-sign icon-white"></i> Step 1 </a>
-                <br/>
-                <div  id="status"></div> 
-                <div class ="well" id="drop"><h2> Drag and Drop file to upload in here! Yup in here </h2></div>
-                <div id="list"></div>
-                <div id ='progress' class ='invisible'></div>
+             <span class="tab-content">
+              <div class="hero-unit tab-pane active" id="B">
+                <h1>Let's get started</h1>
+                <p>Choose a .csv file to upload and specify the url to post forum contents to:</p>
+                <div id="box" class="well">
+                  <a href="#" class="badge badge-info" rel="popover" data-content="Please upload just one csv file. We might be able to support multiple csv files in the near future." data-original-title="must be a .csv file"><i class =" icon-info-sign icon-white"></i> 1 </a>
+                  <br/><br>
+
+                  <div  id="status"></div> 
+
+                  <pre id="availableFiles" class="prettyprint linenums"><ol class="linenums"></ol></pre>
+                 
+                    
+               
+                  <div class ="well" id="drop"><h2> Drag and Drop file to upload in here! Yup in here </h2></div>
+                  <div id="list"></div>
+                  <div id ='progress' class ='invisible'></div>
+                </div>
+                <form class="well form-vertical">
+                  <a href="#"  class="badge badge-info" rel="popover" data-content="For the url, put in the url path to your zendesk box. We advice using your sandbox for practice. <br>
+                  <img src='static/img/forumid.png' ><br>
+                  The Forum id is the number (above) found in url of the forum you want data posted to." data-original-title="put in your ZenDesk login credentials"><i class =" icon-info-sign icon-white"></i> 2 </a>
+                  <br/><br/> 
+                  <input type=hidden name="filename" value="" id="filename">
+                  <input type="text" class="input-small" placeholder="User Name" id="username" name="username">
+                  <input type="password" class="input-small" placeholder="Password" id ="password" name ="password"> <br>
+                  <input type="text" class="input-xlarge" placeholder="ZenDesk URL https://support.zendesk.com" id ="url" name ="url">
+                  <input type="text" class="input-small" placeholder="Forum ID" id="forumId" name ="forumId"><br>
+                  <a href="#" class="btn btn-inverse btn-large" id="button_submit"> <i class="icon-fire icon-white"></i>  Now post!</a>
+                
+                </form>
+              
               </div>
-              <form class="well form-vertical">
-                <a href="#"  class="badge badge-info" rel="popover" data-content="For the url, put in the url path to your zendesk box. We advice using your sandbox for practice. <br>
-                <img src='static/img/forumid.png' ><br>
-                The Forum id is the number (above) found in url of the forum you want data posted to." data-original-title="put in your ZenDesk login credentials"><i class =" icon-info-sign icon-white"></i> Step 2 </a>
-                <br/><br/> 
-                <input type=hidden name="filename" value="" id="filename">
-                <input type="text" class="input-small" placeholder="User Name" id="username" name="username">
-                <input type="password" class="input-small" placeholder="Password" id ="password" name ="password"> <br>
-                <input type="text" class="input-xlarge" placeholder="ZenDesk URL https://support.zendesk.com" id ="url" name ="url">
-                <input type="text" class="input-small" placeholder="Forum ID" id="forumId" name ="forumId"><br>
-                <a href="#" class="btn btn-inverse btn-large" id="button_submit"> <i class="icon-fire icon-white"></i>  Now post!</a>
-              </form>
-            </div>
+
+               <div class="hero-unit tab-pane" id="A">
+                  <h1>Please Read ME!</h1>
+                <p>It might save you from a migrane</p>
+                </div>
+            </span>
+         <div>© 2012 ThoughtWorks, Inc.</div>
+          
           </div>
+        
         </div>
-        <div>© 2012 ThoughtWorks, Inc.</div>
+        
+      
       </div> <!-- end container-->
-      </div> <!--wrapper-->
 
     </body>
     <!--templates-->

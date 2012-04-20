@@ -1,31 +1,27 @@
 /*
-*	Upload files to the server using HTML 5 Drag and drop the folders on your local computer
-*
-*	Tested on:
-*	Mozilla Firefox 3.6.12
-*	Google Chrome 7.0.517.41
-*	Safari 5.0.2
-*	WebKit r70732
-*
 *	The current version does not work on:
 *	Opera 10.63 
 *	Opera 11 alpha
 *	IE 6+
 */
 
+$(document).ready(function() {
+listFiles();
+
+});
+
 function uploader(place, status, targetPHP, show) {
 	
-	// Upload image files
 	upload = function(file) {
+				var success = "<br><div class=\"alert alert-success\"> <a class=\"close\" data-dismiss=\"alert\">×</a>File successfully Loaded</div>"
+
 	
 		// Firefox 3.6, Chrome 6, WebKit
 		if(window.FileReader) { 
 				
-			// Once the process of reading file
 			this.loadEnd = function() {
 				bin = reader.result;				
 				xhr = new XMLHttpRequest();
-				var success = "<br><div class=\"alert alert-success\"> <a class=\"close\" data-dismiss=\"alert\">×</a>File successfully Loaded</div>"
 				xhr.open('POST', targetPHP+'?up=true', true);
 				var boundary = 'xxxxxxxxx';
 	 			var body = '--' + boundary + "\r\n";  
@@ -52,15 +48,13 @@ function uploader(place, status, targetPHP, show) {
 				}
 				if (status) {
 					document.getElementById(status).innerHTML = success;
-					document.getElementById(place).style.display="none";
 					$("#filename").val(file.name);
+					listFiles();
 
 				}
 			}
 				
-			// Loading errors
 			this.loadError = function(event) {
-				
 				switch(event.target.error.code) {
 					case event.target.error.NOT_FOUND_ERR:
 						document.getElementById(status).innerHTML = errorHandler('File not found!');
@@ -74,13 +68,7 @@ function uploader(place, status, targetPHP, show) {
 						document.getElementById(status).innerHTML = errorHandler('Read error.');
 				}	
 			}
-			
-			this.errorHandler= function(error){
-				
-				return  "<br><div class=\"alert alert-success\"> <a class=\"close\" data-dismiss=\"alert\">×</a>" +error+ "</div>"
-			}
-		
-			// Reading Progress
+
 			this.loadProgress = function(event) {
 				if (event.lengthComputable) {
 					var percentage = Math.round((event.loaded * 100) / event.total);
@@ -109,7 +97,6 @@ function uploader(place, status, targetPHP, show) {
 		}
 		
 		
-		// The function that starts reading the file as a binary string
      	reader.readAsBinaryString(file);
 	 
 		
@@ -122,37 +109,47 @@ function uploader(place, status, targetPHP, show) {
 			xhr.setRequestHeader('UP-TYPE', file.type);
 			xhr.send(file); 
 			
-			if (status) {
-				document.getElementById(status).innerHTML = 'Loaded : 100%';
-			}
 			if (show) {
-				var newFile  = document.createElement('div');
-				newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
-				document.getElementById(show).appendChild(newFile);
-			}	
+					var newFile  = document.createElement('div');
+					newFile.innerHTML = "<div class=\"alert alert-info\">"+file.name+' size '+file.size+" bytes</div>"
+					document.getElementById(show).appendChild(newFile);				
+				}
+			if (status) {
+					document.getElementById(status).innerHTML = success;
+					//document.getElementById(place).style.display="none";
+					$("#filename").val(file.name);
+					listFiles();
+
+				}
 		}				
 	}
 
-	// Function drop file
 	this.drop = function(event) {
 		event.preventDefault();
 	 	var dt = event.dataTransfer;
 	 	var files = dt.files;
 	 	for (var i = 0; i<files.length; i++) {
 			var file = files[i];
+			console.log(file.type)
+			if (!file.type.match("text/csv")){
+				document.getElementById(status).innerHTML = errorHandler('NOT a valid .csv file');
+			} else{
 			upload(file);
+		}
 	 	}
 		
 	}
+
+	errorHandler= function(error){
+				
+				return  "<br><div class=\"alert alert-error\"> <a class=\"close\" data-dismiss=\"alert\">×</a>" +error+ "</div>"
+			}
 
 	this.filedraghover =function(e) {
 		e.stopPropagation();
 		e.preventDefault();
 		e.target.className = (e.type == "dragover" ? "hover" : "");
 	}
-
-	
-	// The inclusion of the event listeners (DragOver and drop)
 
 	this.uploadPlace =  document.getElementById(place);
 	this.uploadPlace.addEventListener("dragover", this.filedraghover, true);
@@ -162,4 +159,30 @@ function uploader(place, status, targetPHP, show) {
 
 }
 
+var listFiles = function(){
+$('#availableFiles > ol').html('')
+	$.getJSON('getFolderAsArrayOfNames.php',
+ function(data) {
+    getFolderDetails(data);
+  }
+	);
+
+}
+
+var getFolderDetails = function (data){
+	var count = -1;
+	 $.each(data, function(key, val) {
+	 	if (val.split('.').pop()==="csv"){
+
+	 		$('#availableFiles > ol').append('<li class="L' + count++ + '">' + val + '</li>');
+	 	}
+
+	 	
+	 })
+
+	 if (count < 0) {
+	 		$('#availableFiles > ol').append('<li class="L' + 0 + '"> No files uploaded!</li>');
+
+	 	}
+};
 	

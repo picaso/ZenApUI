@@ -33,7 +33,7 @@ validateElement.prototype.validate = function() {
 	this.forumId=$('#forumId');
 	this.error = [];
 	this.alert = $('.alertTemp').clone();
-	this.box = $('.hero-unit');
+	this.box = $('#B');
 
 
 		if (this.userName.val() ===""){
